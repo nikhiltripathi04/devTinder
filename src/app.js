@@ -3,18 +3,36 @@ const express = require('express');
 
 const app = express();
 
-app.get('/user', (req, res) => {
-  res.send({firstName: "nikhil", lastName : "tripathi"});
-});
+//app.use("/route", [rH, rH2, rH3, rH4, rH5]);
 
-app.post('/user', (req, res) => {
-  console.log("save data to DB");
-  res.send("data saved successfully to the db");
-});
-
-app.use("/test",(req, res) => {
-  res.send("hello from the server");
-});
+app.use("/user", 
+  [(req, res, next) =>{
+  //route handlers
+  console.log("handling the route user 1");
+  next();
+  //res.send("response 1");
+  
+  
+  },
+  (req, res, next) => {
+  //route handler
+  console.log("handling the route user 2");
+  //res.send("2nd response");
+  next();
+  },
+  (req, res, next) => {
+    //route handler
+    console.log("handling the route user 3");
+    //res.send("3rd response");
+    next();
+  },
+  (req, res, next) => {
+    //route handler
+    console.log("handling the route user 4");
+    res.send("4th response");
+    next();
+  }]
+);
 
 
 
