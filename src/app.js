@@ -3,36 +3,42 @@ const express = require('express');
 
 const app = express();
 
-//app.use("/route", [rH, rH2, rH3, rH4, rH5]);
+const { adminAuth, userAuth } = require("./middlewares/auth");
 
-app.use("/user", 
-  [(req, res, next) =>{
-  //route handlers
-  console.log("handling the route user 1");
-  next();
-  //res.send("response 1");
-  
-  
-  },
-  (req, res, next) => {
-  //route handler
-  console.log("handling the route user 2");
-  //res.send("2nd response");
-  next();
-  },
-  (req, res, next) => {
-    //route handler
-    console.log("handling the route user 3");
-    //res.send("3rd response");
-    next();
-  },
-  (req, res, next) => {
-    //route handler
-    console.log("handling the route user 4");
-    res.send("4th response");
-    next();
-  }]
-);
+//handle auth middleware for all requests
+app.use("/admin", adminAuth);
+app.use("/user", userAuth, (req, res) => {
+  res.send("user data sent");
+});
+
+
+app.get("/admin/getAllData", (req, res) => {
+  //logic of checking if the request is authorized
+  //if not - send error
+  // const token = "xy1z";
+  // const isAdminAuthorized  = token === "xyz";
+  // if (isAdminAuthorized) {
+  //   res.send("all data sent");
+  // }
+  // else {
+  //   res.status(401).send("Unauthorized request");
+  // }
+  res.send("all data sent");
+});
+app.get("/admin/deleteUser", (req, res) => {
+  // logic of checking if the request is authorized
+  // if not - send error
+  // const token = "xy1z";
+  // const isAdminAuthorized  = token === "xyz";
+  // if (isAdminAuthorized) {
+  //   res.send("deleted user");
+  // }
+  // else {
+  //   res.status(401).send("Unauthorized request");
+  // }
+  res.send("deleted a user");
+});
+
 
 
 
