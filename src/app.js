@@ -3,43 +3,23 @@ const express = require('express');
 
 const app = express();
 
-const { adminAuth, userAuth } = require("./middlewares/auth");
 
-//handle auth middleware for all requests
-app.use("/admin", adminAuth);
-app.use("/user", userAuth, (req, res) => {
-  res.send("user data sent");
+app.get("/getUserData", (req, res) => {
+  try {
+    //logic of db call and get user data
+    throw new Error("syvdcbs");
+    res.send("user data sent");
+  } catch (err) {
+    res.status(500).send("some error contact support.");
+  }
 });
 
 
-app.get("/admin/getAllData", (req, res) => {
-  //logic of checking if the request is authorized
-  //if not - send error
-  // const token = "xy1z";
-  // const isAdminAuthorized  = token === "xyz";
-  // if (isAdminAuthorized) {
-  //   res.send("all data sent");
-  // }
-  // else {
-  //   res.status(401).send("Unauthorized request");
-  // }
-  res.send("all data sent");
+app.use("/", (err, req, res, next) => {
+  if(err) {
+    res.status(500).send("something went wrong");
+  }
 });
-app.get("/admin/deleteUser", (req, res) => {
-  // logic of checking if the request is authorized
-  // if not - send error
-  // const token = "xy1z";
-  // const isAdminAuthorized  = token === "xyz";
-  // if (isAdminAuthorized) {
-  //   res.send("deleted user");
-  // }
-  // else {
-  //   res.status(401).send("Unauthorized request");
-  // }
-  res.send("deleted a user");
-});
-
-
 
 
 
