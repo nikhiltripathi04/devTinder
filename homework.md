@@ -21,3 +21,12 @@
 - write a dummy auth middleware for admin
 - write a dummy auth middleware for user except login
 - error handling using app.use("/, (err, req, res, next)") => {}) - always towards the end of our application 
+
+- create a free cluster on mongodb official website (mongo atlas)
+- install mongoose library - npm i mongoose
+- connect your application to the database <connectionurl>/devTinder
+- call the connectDB function and connect to database before startinf application on 7777
+- create a userSchema and userModel
+- create POST /signup API to add data to database
+- push dummy data
+- error handling using try, catch

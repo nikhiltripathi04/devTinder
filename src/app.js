@@ -1,28 +1,47 @@
 const express = require('express');
-
+const connectDB = require("./config/database");
+const User = require("./models/user");
+//require("./config/database"); //connecting the cluster
 
 const app = express();
 
+app.post("/signup", async(req, res) => {
+  //creating a new instance of the user model
+  const user = new User({
+    firstName: "nikhil",
+    lastName: "tripathi",
+    emailID: "abc@gmail.com",
+    password: "abc123"
+  });
 
-app.get("/getUserData", (req, res) => {
+
   try {
-    //logic of db call and get user data
-    throw new Error("syvdcbs");
-    res.send("user data sent");
+    await user.save();
+    res.send("user added successfully");
   } catch (err) {
-    res.status(500).send("some error contact support.");
-  }
-});
-
-
-app.use("/", (err, req, res, next) => {
-  if(err) {
-    res.status(500).send("something went wrong");
+    res.status(400).send("error saving the user: " + err.message);
   }
 });
 
 
 
-app.listen(7777, () => {
-  console.log("server is successfully listening on port 7777.");
-});
+
+
+
+
+
+
+
+
+connectDB()
+  .then(()=> {
+    console.log("database connection established");
+    app.listen(7777, ()=> {
+      console.log("server is successfully listening on port 7777.");
+    });
+  })
+  .catch((err) => {
+    console.log("database cannot be connected");
+  });
+
+
