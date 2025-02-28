@@ -30,3 +30,7 @@
 - create POST /signup API to add data to database
 - push dummy data
 - error handling using try, catch
+
+- difference b/w JS and JSON
+- add the express.json middleware to the project
+- make your sign up API dynamic to user data from end user
