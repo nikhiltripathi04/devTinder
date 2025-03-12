@@ -34,3 +34,20 @@
 - difference b/w JS and JSON
 - add the express.json middleware to the project
 - make your sign up API dynamic to user data from end user
+- user.findone with duplicate email id, which will it return
+- API get user from email
+- API get all users Feed API
+- get user by Id API
+- create a delete user API
+- difference between patch and put
+- API - update user
+- explore the mongoose documentation especially for models
+- what are options in model.findoneandupdate and explore more about it
+- API - update the user with email.id
+
+- explore schematype options from documentation
+- add required, unique, lowercase, min, minlenght, trim
+- add default
+- create a custom validate function for gender
+- improve DB schema PUT all appropriate validations on each field in Schema
+- add timestamps to user schema
