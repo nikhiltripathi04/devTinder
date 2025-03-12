@@ -53,3 +53,5 @@
 - add timestamps to user schema
 - api level validation on patch request and signup post api
 - DATA SANITIZING - add API validation for each field
+- install validator
+- explore validator library functions and use validator func for password, emails
