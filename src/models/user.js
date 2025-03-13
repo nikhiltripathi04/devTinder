@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   },
   emailID: {
     type: String,
+    required: true,
     unique: true,
     lowercase: true,
     trim: true,
@@ -21,15 +22,23 @@ const userSchema = new mongoose.Schema({
     }
   },
   password: {
-    type: String
+    type: String,
+    required: true,
+    trim: true,
+    validate(value) {
+      if(!validator.isStrongPassword(value)) {
+        throw new Error("weak password. enter strong password.")
+      }
+    }
   },
   age: {
     type: Number, 
+    required: true,
     min: 18,
-    max: 50
   },
   gender: {
     type: String,
+    required: true,
     validate(value) {
       if(!["male","female","others"].includes(value)) {
         throw new Error("gender data is not valid");
@@ -41,7 +50,8 @@ const userSchema = new mongoose.Schema({
 
   },
   photoUrl: {
-    type: String
+    type: String,
+    default: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fvectors%2Fblank-profile-picture-mystery-man-973460%2F&psig=AOvVaw0H-LbcZqli11WYPj172k8m&ust=1741936479972000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCOjR6J7BhowDFQAAAAAdAAAAABAE"
   },
   about: {
     type: String

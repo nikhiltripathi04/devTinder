@@ -20,16 +20,6 @@ app.post("/signup", async(req, res) => {
   }
 });
 
-app.delete("/signup", async(req, res) => {
-  const Id = req.body.firstName;
-  try {
-    const user = await User.deleteOne({firstName: Id});
-    res.send("user deleted successfully");
-  } catch(err) {
-    res.status(400).send("something went wrong");
-  }
-});
-
 //get user by ID
 app.get("/user", async(req, res) => {
   const Id = req.body._id;
