@@ -1,6 +1,8 @@
 const express = require('express');
 const connectDB = require("./config/database");
 const User = require("./models/user");
+const { validateSignUpData } = require("./utils/validation");
+const bcrypt = require("bcrypt");
 //require("./config/database"); //connecting the cluster
 
 const app = express();
@@ -9,16 +11,57 @@ app.use(express.json()); //-> middleware app.use(express.json())
 
 
 app.post("/signup", async(req, res) => {  
-  //creating a new instance of the user model
-  const user = new User(req.body);  //const user = new User(req.body);
-
+ 
   try {
+    //validation of data
+    validateSignUpData(req);
+    
+    const {firstName, lastName, emailID, password, age, gender, skills, photoUrl, about} = req.body;
+    //encrypting the password
+    const passwordHash = await bcrypt.hash(password, 10);
+    
+
+     //creating a new instance of the user model
+    const user = new User({
+      firstName,
+      lastName,
+      emailID,
+      password: passwordHash,
+      age,
+      gender,
+      skills,
+      photoUrl,
+      about
+    });  
+
     await user.save();
     res.send("user added successfully");
   } catch (err) {
-    res.status(400).send("error saving the user: " + err.message);
+    res.status(400).send("ERROR: " + err.message);
   }
 });
+
+app.post("/login", async(req, res) => {
+  try{
+    const {emailID, password} = req.body;
+
+    const user = await User.findOne({emailID: emailID});
+    if(!user){
+      throw new Error("Wrong Credentials.");
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if(isPasswordValid) {
+      res.send("login successful.");
+    } else {
+      throw new Error("Wrong Password.");
+    }
+  }
+  catch(err) {
+    res.status(400).send("Error: "+ err.message);
+  }
+})
 
 //get user by ID
 app.get("/user", async(req, res) => {
