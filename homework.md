@@ -20,7 +20,7 @@
 - difference b/w app.use and app.all
 - write a dummy auth middleware for admin
 - write a dummy auth middleware for user except login
-- error handling using app.use("/, (err, req, res, next)") => {}) - always towards the end of our application 
+- error handling using app.use("/, (err, req, res, next)") => {} - always towards the end of our application 
 
 - create a free cluster on mongodb official website (mongo atlas)
 - install mongoose library - npm i mongoose
@@ -61,3 +61,23 @@
 - create a password hash using bcrypt.hash and save the user using encrypted password
 - create login API
 - compare passwords and throw new error if email or password is invalid
+
+- install cookie-parser
+- just send a dummy cookie to user
+- create a GET /profile API and check if you get the cookie back
+- install jsonwebtoken
+- in login API, after email and password validation, create a JWT token and send it to user in cookie
+- read the cookies inside your profile API and find the logged in user
+- userAuth middleware
+- add the userAuth middleware in the profile API and a new sendConnectionRequest API
+- set the expiry of JWT token and cookies to 7 days
+- create userSchema method to getJWT()
+- create userSchema method to comparepassword(passwordInputByUser)
+
+- explore tinder APIs
+- create a list of all API you can think of for devTinder
+- group multiplr routes under respective routers
+- read documentation for express.router
+- create route folder for managing auth, profile, request routes
+- create authRoutes, profileRouter, requestRouter
+- import these routers in app.js
