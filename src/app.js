@@ -1,9 +1,9 @@
 const express = require('express');
 const connectDB = require("./config/database");
 const cookieParser = require("cookie-parser"); //require("./config/database"); //connecting the cluster
-const authRouter = require('../routes/auth');
-const profileRouter = require('../routes/profile');
-const requestRouter = require('../routes/request');
+const authRouter = require('../src/routes/auth');
+const profileRouter = require('../src/routes/profile');
+const requestRouter = require('../src/routes/request');
 const app = express();
 
 app.use(express.json()); //-> middleware app.use(express.json())

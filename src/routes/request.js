@@ -1,6 +1,6 @@
 const express = require('express');
 const requestRouter = express.Router();
-const {userAuth} = require("../src/middlewares/auth");
+const {userAuth} = require("../middlewares/auth");
 
 
 requestRouter.get("/sendConnectionRequest", userAuth, async(req,res) => {
